@@ -55,19 +55,54 @@ public class Main {
     }
 
     private static Configuration getNewConfig(Scanner scanner) {
-        System.out.println("Enter total tickets to be released:");
-        int totalTickets = scanner.nextInt();
+        int totalTickets = 0;
 
-        System.out.println("Enter ticket release rate (tickets/sec):");
-        int ticketReleaseRate = scanner.nextInt();
+        while (true) {
+            System.out.println("Enter total tickets to be released (between 1 and 10 00):");
 
-        System.out.println("Enter customer retrieval rate (tickets/sec):");
+            try {
+                totalTickets = Integer.parseInt(scanner.nextLine());
+                if (totalTickets < 1 || totalTickets > 1000) {
+                    System.out.println("Invalid input! Should be a value between 1 to 1000)");
+                } else {
+                    break;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a numeric value");
+            }
+        }
+
+        int ticketReleaseRate = 0;
+
+        while (true) {
+            System.out.println("Enter ticket release rate in milliseconds (between 1 and 2000):");
+            try {
+                ticketReleaseRate = Integer.parseInt(scanner.nextLine());
+                if (ticketReleaseRate < 1 || ticketReleaseRate > 2000) {
+                    System.out.println("Invalid input! Should be a value between 1 to 2000");
+                }else{
+                    break;
+                }
+            }catch (NumberFormatException e) {
+                System.out.println("Invalid input! Please enter a numeric value");
+            }
+        }
+
+        System.out.println("Enter customer retrieval rate in milliseconds(must match ticket release rate):");
         int customerRetrievalRate = scanner.nextInt();
+        while (customerRetrievalRate != ticketReleaseRate) {
+            System.out.println("Customer retrieval rate must match the ticket release rate. Please try again:");
+            customerRetrievalRate = scanner.nextInt();
+        }
 
-        System.out.println("Enter maximum ticket capacity in the pool:");
+        System.out.println("Enter maximum ticket capacity in the pool( must be more than total tickets");
         int maxTicketCapacity = scanner.nextInt();
+        while (maxTicketCapacity <= ticketReleaseRate) {
+            System.out.println("Maximum ticket capacity must be more than total tickets.Plese try again:");
+            maxTicketCapacity = scanner.nextInt();
+        }
 
-        scanner.nextLine(); // Consume newline
+//        scanner.nextLine(); // Consume newline
 
         Configuration config = new Configuration(totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity);
 
