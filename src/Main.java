@@ -9,7 +9,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Configuration config = null;
 
-        // Step 1: Ask if the user wants to load configurations
+        // Ask if the user wants to load configurations
         System.out.println("Do you want to load previous configurations? (yes/no):");
         String loadResponse = scanner.nextLine().trim().toLowerCase();
 
@@ -45,12 +45,12 @@ public class Main {
             config = getNewConfig(scanner);
         }
 
-        // Step 2: Gather new configuration if no configuration was loaded
+        // Gather new configuration if no configuration was loaded
         if (config == null) {
             config = getNewConfig(scanner);
         }
 
-        // Step 3: Start the system with the finalized configuration
+        //Start the system with the finalized configuration
         startTicketingSystem(config);
     }
 
@@ -91,22 +91,22 @@ public class Main {
         System.out.println("Enter customer retrieval rate in milliseconds(must match ticket release rate):");
         int customerRetrievalRate = scanner.nextInt();
         while (customerRetrievalRate != ticketReleaseRate) {
-            System.out.println("Customer retrieval rate must match the ticket release rate. Please try again:");
+            System.out.println("Customer retrieval rate must match the ticket release rate. Please try again:)");
             customerRetrievalRate = scanner.nextInt();
         }
 
-        System.out.println("Enter maximum ticket capacity in the pool( must be more than total tickets");
+        System.out.println("Enter maximum ticket capacity in the pool( must be more than total tickets)");
         int maxTicketCapacity = scanner.nextInt();
         while (maxTicketCapacity <= ticketReleaseRate) {
-            System.out.println("Maximum ticket capacity must be more than total tickets.Plese try again:");
+            System.out.println("Maximum ticket capacity must be more than total tickets.Please try again:");
             maxTicketCapacity = scanner.nextInt();
         }
 
-//        scanner.nextLine(); // Consume newline
+       scanner.nextLine(); // Consume newline
 
         Configuration config = new Configuration(totalTickets, ticketReleaseRate, customerRetrievalRate, maxTicketCapacity);
 
-        // Ask if the user wants to save the configuration
+        //Ask if the user wants to save the configuration
         System.out.println("Do you want to save the configuration? (yes/no):");
         String saveResponse = scanner.nextLine().trim().toLowerCase();
 

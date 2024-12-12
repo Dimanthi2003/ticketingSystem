@@ -1,6 +1,7 @@
 import java.util.LinkedList;
 import java.util.Queue;
 
+
 public class TicketPool {
     private final Queue<String> tickets = new LinkedList<>();
     private final int maxCapacity;
